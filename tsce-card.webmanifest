@@ -1,0 +1,15 @@
+{
+  "name": "Reuben Gibson — TSCE",
+  "short_name": "Reuben Gibson",
+  "description": "Digital business card — Tweddell and Slater Consulting Engineers",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#E7E5DD",
+  "theme_color": "#E7E5DD",
+  "icons": [
+    { "src": "assets/icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

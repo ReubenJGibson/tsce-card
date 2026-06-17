@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Manrope:wght@200;300;500&display=swap');
+
+/* ============================================================
+   TSCE — Tweddell and Slater Consulting Engineers
+   Shared brand tokens · locked palette + type system
+
+   TYPE REGISTERS (decided 2026-06):
+   · Identity & correspondence — letterhead, comp slip, cards, email sig:
+       titles Manrope Bold 700 · body Regular 400 · mono JetBrains Regular 400.
+   · Technical documents — calculations, reports:
+       title Manrope Light 300 · headings & prose ExtraLight 200 ·
+       mono labels JetBrains Mono Medium 500 · mono data Regular 400.
+   ExtraBold 800 stays logo-only.
+   (Local @font-face below covers 400/700/800; the @import adds
+    Manrope 200/300/500 + JetBrains Mono 500 for the technical register.)
+   ============================================================ */
+
+/* ---- Fonts ---- */
+@font-face{font-family:"Manrope";font-style:normal;font-weight:400;font-display:swap;
+  src:url("fonts/Manrope-Regular.ttf") format("truetype");}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:700;font-display:swap;
+  src:url("fonts/Manrope-Bold.ttf") format("truetype");}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:800;font-display:swap;
+  src:url("fonts/Manrope-ExtraBold.ttf") format("truetype");}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;font-display:swap;
+  src:url("fonts/JetBrainsMono-Regular.ttf") format("truetype");}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:700;font-display:swap;
+  src:url("fonts/JetBrainsMono-Bold.ttf") format("truetype");}
+
+:root{
+  /* Lakeland palette — locked to the master logo */
+  --sage:        #6D8474;   /* primary — rules, wordmark green */
+  --sage-deep:   #5C7565;   /* headings / subject — AA-legible */
+  --sage-light:  #7E9484;   /* tints, accent tick */
+  --bronze:      #86663D;   /* secondary accent */
+  --graphite:    #1F2622;   /* body ink */
+  --slate:       #6F7670;   /* labels, captions, fine print */
+  --line:        #E3E2DC;   /* hairline rules */
+  --panel:       #F1F0EB;   /* panel fill */
+  --surface:     #ECEEEC;   /* tile surface */
+  --paper:       #FFFFFF;   /* background */
+
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}

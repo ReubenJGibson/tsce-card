@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TSCE — Digital Business Card</title>
+
+<!-- Add to Home Screen -->
+<link rel="manifest" href="tsce-card.webmanifest">
+<meta name="theme-color" content="#E7E5DD">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Reuben Gibson">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="icon" type="image/png" href="assets/icon-512.png">
+
+<link rel="stylesheet" href="assets/brand.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{
+    background:#E7E5DD;
+    font-family:var(--sans);
+    color:var(--graphite);
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+    gap:18px;padding:calc(34px + env(safe-area-inset-top)) 18px calc(40px + env(safe-area-inset-bottom));
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .card{
+    width:392px;max-width:100%;
+    margin-top:auto;            /* centre when room; scroll from top when tall */
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 14px 44px rgba(31,38,34,.18);
+    overflow:hidden;
+  }
+
+  /* header */
+  .head{padding:26px 34px 14px;text-align:center;}
+  .head img{width:270px;height:auto;display:block;margin:0 auto 14px;}
+  .head .rule{border-top:2px solid var(--sage);width:56px;margin:0 auto 14px;}
+  .head .name{font-size:22px;font-weight:700;letter-spacing:-.01em;color:var(--graphite);line-height:1.15;}
+  .head .creds{font-family:var(--mono);font-size:11px;color:var(--slate);letter-spacing:.03em;margin-top:6px;line-height:1.55;}
+  .head .creds .role{color:var(--bronze);}
+
+  /* contact rows */
+  .rows{padding:2px 14px;}
+  .row{
+    display:flex;align-items:center;gap:14px;
+    padding:8px 18px;border-radius:11px;
+    text-decoration:none;color:var(--graphite);
+    transition:background .14s;
+  }
+  .row:hover{background:var(--panel);}
+  .row .ic{
+    flex:0 0 32px;height:32px;border-radius:9px;
+    background:var(--surface);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage-deep);
+  }
+  .row .lab{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--slate);text-transform:uppercase;}
+  .row .val{font-size:14.5px;color:var(--graphite);line-height:1.3;margin-top:1px;}
+
+  /* QR block */
+  .qrwrap{
+    margin:10px 24px 2px;padding:15px 18px;
+    background:var(--panel);
+    border-radius:14px;
+    display:flex;align-items:center;gap:16px;
+  }
+  #qr{width:112px;height:112px;flex:0 0 112px;background:#fff;padding:8px;border-radius:9px;box-shadow:0 1px 4px rgba(31,38,34,.08);}
+  #qr svg{display:block;width:100%;height:100%;}
+  .qrwrap .qtxt .qh{font-size:14px;font-weight:700;color:var(--graphite);line-height:1.3;}
+  .qrwrap .qtxt .qs{font-family:var(--mono);font-size:10.5px;color:var(--slate);line-height:1.55;margin-top:5px;}
+
+  /* save button */
+  .save{padding:14px 24px 18px;}
+  .save button{
+    width:100%;border:none;cursor:pointer;
+    background:var(--sage-deep);color:#fff;
+    font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.04em;
+    padding:13px;border-radius:11px;transition:background .15s;
+  }
+  .save button:hover{background:var(--sage);}
+
+  .legal{
+    text-align:center;
+    font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;color:var(--slate);
+    padding:0 24px 18px;line-height:1.6;
+  }
+
+  .desk-note{margin-bottom:auto;font-family:var(--mono);font-size:11px;color:var(--slate);letter-spacing:.03em;text-align:center;max-width:360px;line-height:1.6;}
+</style>
+</head>
+<body>
+  <template id="__bundler_thumbnail" data-bg-color="#6D8474"><svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect x="455" y="250" width="290" height="300" rx="40" fill="#ffffff"/><text x="600" y="420" font-family="Arial, sans-serif" font-size="150" font-weight="800" fill="#5C7565" text-anchor="middle">TS</text><text x="600" y="525" font-family="Arial, sans-serif" font-size="100" font-weight="700" fill="#86663D" text-anchor="middle">ce</text></svg></template>
+  <style>.__home{position:fixed;top:14px;left:14px;z-index:99999;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.04em;text-decoration:none;background:#1F2622;color:#fff;padding:7px 12px;border-radius:999px;box-shadow:0 3px 12px rgba(31,38,34,.28);}.__home:hover{background:#5C7565;}@media print{.__home{display:none!important;}}</style>
+  
+
+  <div class="card">
+    <div class="head">
+      <img src="assets/TSCE_Logo_crop.png" alt="Tweddell and Slater Consulting Engineers">
+      <div class="rule"></div>
+      <div class="name">Reuben Gibson</div>
+      <div class="creds">BEng (Hons) CEng MIStructE<br><span class="role">Managing Director</span></div>
+    </div>
+
+    <div class="rows">
+      <a class="row" href="tel:+441768865400">
+        <span class="ic">T</span>
+        <span><span class="lab">Office</span><br><span class="val">01768 865400</span></span>
+      </a>
+      <a class="row" href="tel:+447432682694">
+        <span class="ic">M</span>
+        <span><span class="lab">Mobile</span><br><span class="val">07432 682694</span></span>
+      </a>
+      <a class="row" href="mailto:reuben@tsceltd.com">
+        <span class="ic">E</span>
+        <span><span class="lab">Email</span><br><span class="val">reuben@tsceltd.com</span></span>
+      </a>
+      <a class="row" href="https://www.tsceltd.com" target="_blank" rel="noopener">
+        <span class="ic">W</span>
+        <span><span class="lab">Web</span><br><span class="val">www.tsceltd.com</span></span>
+      </a>
+      <a class="row" href="https://maps.google.com/?q=Langlands,Pallet+Hill,Penrith+CA11+0BY" target="_blank" rel="noopener">
+        <span class="ic">A</span>
+        <span><span class="lab">Address</span><br><span class="val">Langlands, Pallet Hill, Penrith CA11 0BY</span></span>
+      </a>
+    </div>
+
+    <div class="qrwrap">
+      <div id="qr"></div>
+      <div class="qtxt">
+        <div class="qh">Scan to save my contact</div>
+        <div class="qs">Point a phone camera at the code — it adds Reuben to your contacts.</div>
+      </div>
+    </div>
+
+    <div class="save">
+      <button id="saveBtn">Save to contacts&nbsp;&nbsp;↓</button>
+    </div>
+
+    <div class="legal">
+      TWEDDELL AND SLATER CONSULTING ENGINEERS LTD<br>REG. ENGLAND &amp; WALES · 3940744
+    </div>
+  </div>
+
+  <div class="desk-note">A digital card — open it on a phone, share the link, or print the QR onto the paper card.</div>
+
+<script>
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'N:Gibson;Reuben;;;',
+    'FN:Reuben Gibson',
+    'ORG:Tweddell and Slater Consulting Engineers Ltd',
+    'TITLE:Managing Director',
+    'TEL;TYPE=WORK,VOICE:+441768865400',
+    'TEL;TYPE=CELL,VOICE:+447432682694',
+    'EMAIL;TYPE=WORK:reuben@tsceltd.com',
+    'URL:https://www.tsceltd.com',
+    'ADR;TYPE=WORK:;;Langlands\\, Pallet Hill;Penrith;Cumbria;CA11 0BY;United Kingdom',
+    'NOTE:BEng (Hons) CEng MIStructE · Consulting Engineers',
+    'END:VCARD'
+  ].join('\n');
+
+  // qrcode-generator: typeNumber 0 = auto-fit (encodes the full vCard), level M
+  const qr = qrcode(0, 'M');
+  qr.addData(vcard);
+  qr.make();
+  document.getElementById('qr').innerHTML =
+    qr.createSvgTag({cellSize:4, margin:0, scalable:true}).replace(/#000000|black/g, '#1F2622');
+
+  // Save-to-contacts: download a .vcf
+  document.getElementById('saveBtn').addEventListener('click', ()=>{
+    const blob = new Blob([vcard], {type:'text/vcard;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'Reuben_Gibson_TSCE.vcf';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 1500);
+  });
+</script>
+</body>
+</html>
